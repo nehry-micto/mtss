@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
-import { Department, PageProps } from "@/types";
+import { Department, PageProps, Pagination } from "@/types";
 import { Button } from "@/Components/ui/button";
 import {
     Dialog,
@@ -14,9 +14,14 @@ import {
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { FormEvent, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/Components/ui/use-toast";
 
-export default function Index({ auth }: PageProps) {
+export default function Index({
+    auth,
+    response,
+}: PageProps<{
+    response: Pagination<Department>;
+}>) {
     const { data, setData, post, processing, errors, reset, clearErrors } =
         useForm<Department>({
             name: "",
@@ -110,6 +115,11 @@ export default function Index({ auth }: PageProps) {
                         </form>
                     </DialogContent>
                 </Dialog>
+            </div>
+            <div>
+                <div className="container mx-auto">
+                                        
+                </div>
             </div>
         </AuthenticatedLayout>
     );

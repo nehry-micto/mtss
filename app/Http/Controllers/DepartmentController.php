@@ -11,10 +11,15 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return Inertia::render('Department/Index');
+
+        $response = Department::paginate(10);
+
+        return Inertia::render('Department/Index', [
+            'response' => $response
+        ]);
     }
 
     /**
@@ -77,5 +82,10 @@ class DepartmentController extends Controller
     public function destroy(string $id)
     {
         //
+        $record = Department::find($id);
+
+        $record->delete();
+
+        return redirect()->back();
     }
 }

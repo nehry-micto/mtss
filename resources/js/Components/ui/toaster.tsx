@@ -5,17 +5,13 @@ import {
     ToastProvider,
     ToastTitle,
     ToastViewport,
-} from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
+} from "@/Components/ui/toast";
+import { useToast } from "@/Components/ui/use-toast";
 import {
-    CheckCircledIcon,
     CheckIcon,
     Cross1Icon,
-    CrossCircledIcon,
     ExclamationTriangleIcon,
     InfoCircledIcon,
-    QuestionMarkCircledIcon,
-    QuestionMarkIcon,
 } from "@radix-ui/react-icons";
 
 export function Toaster() {
