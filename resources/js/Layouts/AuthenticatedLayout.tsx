@@ -1,18 +1,19 @@
-import {
-    useState,
-    PropsWithChildren,
-    ReactNode,
-    useRef,
-    useEffect,
-} from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
-import { User } from "@/types";
 import { cn } from "@/lib/utils";
+import { User } from "@/types";
+import { Link } from "@inertiajs/react";
+import {
+    PropsWithChildren,
+    ReactNode,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 
+import { Button } from "@/Components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -22,7 +23,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import { Button } from "@/Components/ui/button";
+import { Toaster } from "@/Components/ui/toaster";
 import {
     AvatarIcon,
     CheckIcon,
@@ -35,7 +36,6 @@ import {
     PersonIcon,
 } from "@radix-ui/react-icons";
 import { Backpack, User2 } from "lucide-react";
-import { Toaster } from "@/Components/ui/toaster";
 
 export default function Authenticated({
     user,
@@ -219,7 +219,9 @@ export default function Authenticated({
                 </div>
             </aside>
 
-            <div className="p-4 sm:ml-64">{children}</div>
+            <div className="p-4 sm:ml-64">
+                <div className="mx-auto max-w-7xl mt-4">{children}</div>
+            </div>
             <Toaster />
         </>
     );

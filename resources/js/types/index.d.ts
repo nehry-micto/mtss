@@ -1,4 +1,4 @@
-import { IconProps } from "@radix-ui/react-icons/dist/types";
+
 
 export interface User {
     id: number;
@@ -24,6 +24,7 @@ export type PageProps<
 };
 
 export interface Department {
+    id?: string;
     name: string;
     abbr: string;
     color?: string;

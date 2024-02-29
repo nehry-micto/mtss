@@ -13,12 +13,10 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
-        //
-
-        $response = Department::paginate(10);
 
         return Inertia::render('Department/Index', [
-            'response' => $response
+            'filters' => $request->all('search', 'column', 'orderBy'),
+            'response' => Department::all(),
         ]);
     }
 
@@ -66,6 +64,7 @@ class DepartmentController extends Controller
     public function edit(string $id)
     {
         //
+
     }
 
     /**
@@ -74,6 +73,20 @@ class DepartmentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required|max:255|min:3',
+            'abbr' => 'required|max:255|min:2'
+        ]);
+
+        $department = Department::findOrFail($id);
+
+        $department->update(
+            $validated
+        );
+
+        // dd($request->name);
+
+        return redirect()->back();
     }
 
     /**
