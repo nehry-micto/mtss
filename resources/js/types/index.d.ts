@@ -30,6 +30,15 @@ export interface Department {
     color?: string;
 }
 
+export interface Client {
+    id?: string;
+    name: string;
+    department: Department;
+    code: string;
+    create_at: Date;
+    updated_at: Date;
+}
+
 export interface PaginationLink {
     active: boolean;
     label: string;

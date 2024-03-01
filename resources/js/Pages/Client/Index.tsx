@@ -1,12 +1,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Client, PageProps, Pagination } from "@/types";
 import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
 
-export default function Index({ auth }: PageProps) {
+export default function Index({
+    auth,
+    clients,
+}: PageProps<{
+    clients: Pagination<Client[]>;
+}>) {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Client" />
-            <div>Client Page</div>
+            <div className="space-y-4">
+                <h4 className="uppercase">Clients</h4>
+            </div>
         </AuthenticatedLayout>
     );
 }

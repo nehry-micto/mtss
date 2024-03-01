@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +15,10 @@ class ClientController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Client/Index');
+        return Inertia::render('Client/Index', [
+            'departments' => fn () => Department::all(),
+            'clients' => Client::paginate(),
+        ]);
     }
 
     /**
