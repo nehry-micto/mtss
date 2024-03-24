@@ -43,11 +43,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
         });
 
-    Route::controller(ClientController::class)->prefix('client')
-        ->name('client.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-        });
+    Route::resource('client', ClientController::class);
 
     Route::controller(DepartmentController::class)->prefix('department')
         ->name('department.')

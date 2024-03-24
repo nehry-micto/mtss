@@ -32,11 +32,14 @@ export interface Department {
 
 export interface Client {
     id?: string;
-    name: string;
-    department: Department;
-    code: string;
-    create_at: Date;
-    updated_at: Date;
+    first_name: string;
+    middle_name?: string;
+    last_name: string;
+    department: Department | null;
+    email: string;
+    birth_date: string;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface PaginationLink {

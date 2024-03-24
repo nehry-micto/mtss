@@ -1,3 +1,4 @@
+import TableRowEmpty from "@/Components/TableRowEmpty";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -101,7 +102,16 @@ export default function Index({
     };
 
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            title="Department"
+            routeList={[
+                {
+                    name: "Department",
+                    href: "department.index",
+                },
+            ]}
+        >
             <Head title="Department" />
             <AlertDialog open={alertDialogOpen}>
                 <AlertDialogContent>
@@ -133,7 +143,6 @@ export default function Index({
             </AlertDialog>
 
             <div className="space-y-4">
-                <h4 className="uppercase">Department</h4>
                 <div>
                     <Dialog
                         open={open}
@@ -265,21 +274,10 @@ export default function Index({
                                         </TableRow>
                                     ))
                                 ) : (
-                                    <TableRow>
-                                        <TableCell
-                                            colSpan={4}
-                                            className="opacity-50"
-                                        >
-                                            <div className="font-medium text-center  py-8 justify-center flex items-center gap-2 ">
-                                                <InfoCircledIcon className="w-6 h-6" />
-                                                <div>
-                                                    Department is empty you can
-                                                    add by clicking "Create
-                                                    Department" button
-                                                </div>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
+                                    <TableRowEmpty
+                                        colsSpan={4}
+                                        name="Department"
+                                    />
                                 )}
                             </TableBody>
                         </Table>

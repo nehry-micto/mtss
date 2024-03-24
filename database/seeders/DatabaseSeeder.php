@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,9 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\User::create(
+            [
+                'name' => 'Admin',
+                'email' => 'admin@mtss.com',
+                'password' => Hash::make('password'),
+                'role' => 1,
+                'email_verified_at' => now(),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+            ]
+        );
 
         $this->call([
-            PermissionAndAdminSeeder::class
+            DepartmentSeeder::class,
+            ClientSeeder::class
         ]);
     }
 }

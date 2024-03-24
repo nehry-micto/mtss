@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('difficulties', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
+            $table->foreignIdFor(\App\Models\Client::class, 'client_id');
             $table->string('name');
+            $table->text('specification')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('difficulties');
+        Schema::dropIfExists('assets');
     }
 };

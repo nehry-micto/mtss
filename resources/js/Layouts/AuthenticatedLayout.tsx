@@ -4,15 +4,22 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { cn } from "@/lib/utils";
 import { User } from "@/types";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import {
+    Fragment,
     PropsWithChildren,
-    ReactNode,
     useEffect,
     useRef,
     useState,
 } from "react";
 
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbSeparator,
+} from "@/Components/ui/breadcrumb";
 import { Button } from "@/Components/ui/button";
 import {
     DropdownMenu,
@@ -35,13 +42,21 @@ import {
     MagnifyingGlassIcon,
     PersonIcon,
 } from "@radix-ui/react-icons";
-import { Backpack, User2 } from "lucide-react";
+import { Backpack } from "lucide-react";
 
 export default function Authenticated({
     user,
-    header,
+    title,
     children,
-}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
+    routeList,
+}: PropsWithChildren<{
+    user: User;
+    title?: string;
+    routeList?: Array<{
+        name: string;
+        href: string;
+    }>;
+}>) {
     const [showSideNav, setShowSideNav] = useState(false);
     const navRef = useRef<any>(null);
 
@@ -220,7 +235,36 @@ export default function Authenticated({
             </aside>
 
             <div className="p-4 sm:ml-64">
-                <div className="mx-auto max-w-7xl mt-4">{children}</div>
+                <Head title={title} />
+                <div className="mx-auto max-w-7xl mt-4">
+                    <div className="mb-8">
+                        <h4 className="uppercase">{title}</h4>
+                        {routeList && (
+                            <Breadcrumb>
+                                <BreadcrumbList>
+                                    {routeList.map((item, index) => (
+                                        <Fragment key={index}>
+                                            <BreadcrumbItem>
+                                                <BreadcrumbLink asChild>
+                                                    <Link
+                                                        href={route(item.href)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                </BreadcrumbLink>
+                                            </BreadcrumbItem>
+                                            {routeList.length - 1 !== index && (
+                                                <BreadcrumbSeparator />
+                                            )}
+                                        </Fragment>
+                                    ))}
+                                </BreadcrumbList>
+                            </Breadcrumb>
+                        )}
+                    </div>
+
+                    {children}
+                </div>
             </div>
             <Toaster />
         </>

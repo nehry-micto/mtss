@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import InputError from "../InputError";
 
 export interface InputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     ref={ref}
                     {...props}
                 />
-                {error && <small className="text-red-500">{error}</small>}
+                {error && <InputError message={error} />}
             </div>
         );
     }

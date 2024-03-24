@@ -21,7 +21,7 @@ h4 {
 }
 
 p {
-    @apply leading-7 [&:not(:first-child)]:mt-6;
+    @apply leading-7 [&:not(:first-child)]:mt-1;
 }
 
 blockquote {
@@ -82,4 +82,8 @@ blockquote {
     body {
         @apply bg-background text-foreground;
     }
+}
+
+.rdp-vhidden {
+    @apply hidden;
 }

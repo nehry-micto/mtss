@@ -15,14 +15,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('technical_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'user_id');
             $table->foreignIdFor(Client::class, 'client_id');
-            $table->foreignIdFor(Difficulty::class, 'difficulty_id');
-            $table->string('findings');
-            $table->string('action_taken');
-            $table->string('recommendations');
+            $table->enum('technical_request_level', [1, 2, 3, 4]);
+            $table->timestamp('request_date');
+            $table->timestamp('completion_date')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('technical_requests');
     }
 };

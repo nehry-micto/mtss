@@ -4,29 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Department;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(): \Inertia\Response
     {
-        //
         return Inertia::render('Client/Index', [
             'departments' => fn () => Department::all(),
-            'clients' => Client::paginate(),
+            'clients' => Client::with('department')->paginate(),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('Client/Create', [
+            'departments' => fn () => Department::all(['id', 'name']),
+        ]);
     }
 
     /**
@@ -34,7 +32,26 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|min:2|max:100',
+            'last_name' => 'required|min:2|max:100',
+            'middle_name' => 'max:100',
+            'email' => 'required|email|max:100',
+            'birth_date' => 'required|date',
+            'department' => 'required|exists:departments,id',
+        ]);
+
+        Client::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'middle_name' => $request->middle_name,
+            'email' => $request->email,
+            'birth_date' => Carbon::parse($request->birth_date),
+            'department_id' => $request->department
+
+        ]);
+
+        return redirect()->route('client.index');
     }
 
     /**

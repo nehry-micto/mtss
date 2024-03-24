@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Traits\UniqueCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model
@@ -14,11 +16,25 @@ class Client extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'code'
+        'middle_name',
+        'code',
+        'email',
+        'birth_date',
+        'department_id',
     ];
 
-    protected static function booted()
+    protected function casts(): array
     {
-        static::bootGenerateUniqueCode();
+        return [];
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function assets(): HasMany
+    {
+        return $this->hasMany(Asset::class);
     }
 }
