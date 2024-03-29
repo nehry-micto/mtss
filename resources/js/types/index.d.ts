@@ -30,7 +30,7 @@ export interface Department {
     color?: string;
 }
 
-export interface Client {
+export interface Employee {
     id?: string;
     first_name: string;
     middle_name?: string;
@@ -62,4 +62,15 @@ export interface Pagination<T> {
     prev_page_url: string | null;
     to: number;
     total: number;
+}
+
+export interface Filters {
+    search?: string;
+    direction?: "asc" | "desc";
+    column?: string;
+    per_page?: number;
+    page?: number;
+    trash?: boolean;
+    start_date?: string
+    end_date?: string
 }

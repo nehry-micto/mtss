@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ClientSeeder extends Seeder
+class EmployeeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         //
-        \App\Models\Client::factory(50)->create();
+        \App\Models\Employee::factory(50)->create();
     }
 }

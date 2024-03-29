@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->foreignIdFor(\App\Models\Client::class, 'client_id');
+            $table->foreignIdFor(\App\Models\Employee::class, 'employee_id');
             $table->string('name');
             $table->text('specification')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

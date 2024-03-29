@@ -12,13 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('email')->unique()->nullable();
             $table->date('birth_date')->nullable();
+            $table->enum('sex', ['male', 'female'])->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignIdFor(Department::class, 'department_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('employees');
     }
 };

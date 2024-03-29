@@ -24,7 +24,6 @@ import { Label } from "@/Components/ui/label";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -32,14 +31,12 @@ import {
 } from "@/Components/ui/table";
 import { useToast } from "@/Components/ui/use-toast";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Department, PageProps, Pagination } from "@/types";
-import { Head, Link, router, useForm } from "@inertiajs/react";
-import { InfoCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import { Department, PageProps } from "@/types";
+import { Head, router, useForm } from "@inertiajs/react";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 export default function Index({
-    auth,
     response,
 }: PageProps<{
     response: Department[];
@@ -103,7 +100,6 @@ export default function Index({
 
     return (
         <AuthenticatedLayout
-            user={auth.user}
             title="Department"
             routeList={[
                 {
@@ -112,7 +108,6 @@ export default function Index({
                 },
             ]}
         >
-            <Head title="Department" />
             <AlertDialog open={alertDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
@@ -141,7 +136,6 @@ export default function Index({
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-
             <div className="space-y-4">
                 <div>
                     <Dialog
@@ -165,7 +159,7 @@ export default function Index({
                                     </DialogTitle>
                                     <DialogDescription>
                                         This detail can be use to select the
-                                        department of the client.
+                                        department of the employee.
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">

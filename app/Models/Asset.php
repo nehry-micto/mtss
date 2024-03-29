@@ -13,6 +13,6 @@ class Asset extends Model
         'code',
         'name',
         'specification',
-        'client_id'
+        'employee_id'
     ];
 }

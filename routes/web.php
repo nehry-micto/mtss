@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
         });
 
-    Route::resource('client', ClientController::class);
+    Route::resource('employee', EmployeeController::class);
 
     Route::controller(DepartmentController::class)->prefix('department')
         ->name('department.')

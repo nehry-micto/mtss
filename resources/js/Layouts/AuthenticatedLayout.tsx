@@ -4,7 +4,7 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { cn } from "@/lib/utils";
 import { User } from "@/types";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import {
     Fragment,
     PropsWithChildren,
@@ -45,20 +45,20 @@ import {
 import { Backpack } from "lucide-react";
 
 export default function Authenticated({
-    user,
     title,
     children,
     routeList,
 }: PropsWithChildren<{
-    user: User;
     title?: string;
     routeList?: Array<{
         name: string;
         href: string;
+        params?: any;
     }>;
 }>) {
     const [showSideNav, setShowSideNav] = useState(false);
     const navRef = useRef<any>(null);
+    const { auth } = usePage().props as any;
 
     useEffect(() => {
         document.addEventListener("mousedown", handleOutsideClick);
@@ -128,13 +128,13 @@ export default function Authenticated({
                         </li>
                         <li>
                             <NavLink
-                                active={route().current("client.*")}
-                                href={route("client.index")}
+                                active={route().current("employee.*")}
+                                href={route("employee.index")}
                                 className=""
                             >
                                 <AvatarIcon className="w-5 h-5" />
                                 <span className="ml-3 flex-1 whitespace-nowrap">
-                                    Client
+                                    Employee
                                 </span>
                             </NavLink>
                         </li>
@@ -197,7 +197,7 @@ export default function Authenticated({
                     <div className="mt-auto flex">
                         <div className="flex w-full justify-between items-center">
                             <span className="text-sm font-medium text-black dark:text-white">
-                                {user.email}
+                                {auth.user.email}
                             </span>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
@@ -207,7 +207,7 @@ export default function Authenticated({
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-56">
                                     <DropdownMenuLabel>
-                                        {user.name}
+                                        {auth.user.name}
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
@@ -247,7 +247,10 @@ export default function Authenticated({
                                             <BreadcrumbItem>
                                                 <BreadcrumbLink asChild>
                                                     <Link
-                                                        href={route(item.href)}
+                                                        href={route(
+                                                            item.href,
+                                                            item.params
+                                                        )}
                                                     >
                                                         {item.name}
                                                     </Link>

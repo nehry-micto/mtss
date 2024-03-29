@@ -49,11 +49,11 @@ function Create({
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        form.post(route("client.store"), {
+        form.post(route("employee.store"), {
             preserveScroll: true,
             onSuccess: () => {
                 toast({
-                    title: "Client Successfully Created",
+                    title: "Employee Successfully Created",
                     status: "success",
                 });
                 // router.reload({ only: ["response"] });
@@ -63,15 +63,14 @@ function Create({
 
     return (
         <AuthenticatedLayout
-            user={auth.user}
-            title="Create Client"
+            title="Create Employee"
             routeList={[
-                { name: "Clients", href: "client.index" },
-                { name: "Create Client", href: "client.create" },
+                { name: "Employees", href: "employee.index" },
+                { name: "Create Employee", href: "employee.create" },
             ]}
         >
             <div className="space-y-4">
-                <h3>Client Profile</h3>
+                <h3>Employee Profile</h3>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid max-w-3xl items-start sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 w-full gap-4">
                         <div className="grid w-full lg:max-w-sm items-center gap-1.5">
